@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages { 
+        stage('Starting point'){
+            steps{
+                echo "this is a starting point for the terraform pipeline"
+        } 
+    }
+    stage ('Provision infrastructure'){
+        environment{
+            AWS_ACCESS_KEY = credentials("aws-access-key") // this will be used to access aws resources from jenkins.
+            AWS_SECRET_ACCESS_KEY = credentials("aws-secret-access-key")
+            //TF_VAR_env_prefix = TEST
+        }
+        steps{
+            sh "terraform init"
+            sh "terraform apply --auto-approve"
+        }
+    }
+    }
+    stage('Thank you'){
+        steps{
+            echo "yaay successful TF deployment"
+        }
+    }
+stage('Destroy everything'){
+    steps{
+        sh "terraform destroy -auto-approve"
+    }
+}
+
+}
