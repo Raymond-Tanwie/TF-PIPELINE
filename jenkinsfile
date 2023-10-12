@@ -23,6 +23,15 @@ pipeline {
                 echo "yaay successful TF deployment"
         }
     }
+    
+        stage('Destroy the infrastructure'){
+            environment{
+                AWS_ACCESS_KEY = credentials("aws-access-key") // this will be used to access aws resources from jenkins.
+                AWS_SECRET_ACCESS_KEY = credentials("secret-access-key")
+            steps{
+                sh "terraform destroy --auto-approve"
+            }
+        }
     }
         
       
