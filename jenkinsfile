@@ -24,10 +24,10 @@ pipeline {
             echo "yaay successful TF deployment"
         }
     }
-stage('Destroy everything'){
+/*stage('Destroy everything'){
     steps{
         sh "terraform destroy -auto-approve"
     }
-}
+}*/
 
 }
