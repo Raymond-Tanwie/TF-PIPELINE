@@ -18,12 +18,12 @@ pipeline {
                 sh "terraform apply --auto-approve"
         }
     }
-    }
-        
         stage('Thank you'){
             steps{
                 echo "yaay successful TF deployment"
         }
     }
-
+    }
+        
+      
 }
